@@ -51,7 +51,11 @@ class AuthorSerializer(serializers.ModelSerializer):
         author = Author.objects.create(user=user, name=validated_data['name'])
         return author
 
-
+    def get_number_of_books(self,obj):
+        if not isinstance(obj,Author):#check the object is an instance of product
+            return None
+        else:
+            return obj.book.count()
 
 # reader serailizer
 class ReaderSerializer(serializers.ModelSerializer):
@@ -116,7 +120,7 @@ class BookSerializer(serializers.ModelSerializer):
         else:
             return obj.book.count()
         
-        
+
 # review author serailizer
 class ReviewAuthSerializer(serializers.ModelSerializer):
     class Meta:
