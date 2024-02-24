@@ -80,27 +80,27 @@ if auth_response.status_code==200:
 
         print(get_response.json())
         # create a text with book title and book id for user input action
-        if get_response.json()['results']:
-            textfordisplay_review_book=''
-            for i in get_response.json()['results']:
-
-                text=f" Enter {i['pk']} for book {i['title']}, "
-                textfordisplay_review_book=textfordisplay_review_book+text
-            textfordisplay_review_authors=textfordisplay_review_book+" : "
-            print("***************")
-            # display text contant book title and id, to get input from user 
-            reviews_about_book=int(input(textfordisplay_review_book)) 
-
-            review=input("enter review :")
-            rate=int(input("enter rate out of 5 :"))
-            endpoint = "http://localhost:8000/review_book_create" 
-            
-            
         
-            get_response = requests.post(endpoint,headers=headers,json={"review":review,'rating':rate,'book':reviews_about_book}) 
-                
-            if auth_response.status_code==200:
-                print("....Review Added.....")
-                
-                print(get_response.json())   
+        textfordisplay_review_book=''
+        for i in get_response.json():
+
+            text=f" Enter {i['pk']} for book {i['title']}, "
+            textfordisplay_review_book=textfordisplay_review_book+text
+        textfordisplay_review_authors=textfordisplay_review_book+" : "
+        print("***************")
+        # display text contant book title and id, to get input from user 
+        reviews_about_book=int(input(textfordisplay_review_book)) 
+
+        review=input("enter review :")
+        rate=int(input("enter rate out of 5 :"))
+        endpoint = "http://localhost:8000/review_book_create" 
+        
+        
+    
+        get_response = requests.post(endpoint,headers=headers,json={"review":review,'rating':rate,'book':reviews_about_book}) 
+            
+        if auth_response.status_code==200:
+            print("....Review Added.....")
+            
+            print(get_response.json())   
         
